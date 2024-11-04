@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Payments</title>
+</head>
+<body>
+    <h1>Pending Payments</h1>
+    <ul>
+        {% for payment in payments %}
+            <li>
+                <p>User: {{ payment.user.username }}</p>
+                <p>Amount: ${{ payment.amount }}</p>
+                <p>Status: {{ payment.status }}</p>
+                <form method="POST" action="{% url 'confirm_payment' payment.transaction_id %}">
+                    {% csrf_token %}
+                    <button type="submit">Confirm Payment</button>
+                </form>
+            </li>
+        {% empty %}
+            <p>No pending payments.</p>
+        {% endfor %}
+    </ul>
+    <a href="{% url 'index' %}">Go to Home</a>
+</body>
+</html>

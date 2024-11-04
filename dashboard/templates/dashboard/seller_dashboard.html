@@ -1,0 +1,19 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}About Us{% endblock %}
+
+{% block content %}
+<h1>welcome seller</h1>
+<nav>
+
+        <!-- Assuming you have a context variable `products` that lists all products -->
+        {% for product in products %}
+            <li>
+                <a href="{% url 'product:product-detail' pk=product.pk %}">{{ product.name }}</a>
+                <ul>
+                    <li><a href="{% url 'product:product-edit' pk=product.pk %}">Edit</a></li>
+                    <li><a href="{% url 'product:product-delete' pk=product.pk %}">Delete</a></li>
+                </ul>
+            </li>
+        {% endfor %}
+{% endblock %}

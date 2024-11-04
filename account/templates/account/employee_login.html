@@ -1,0 +1,26 @@
+<!-- templates/account/employee_login.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Login</title>
+</head>
+<body>
+    <h2>Employee Login</h2>
+    <form method="post">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button type="submit">Login</button>
+    </form>
+    {% if error_message %}
+        <p style="color: red;">{{ error_message }}</p>
+    {% endif %}
+    <p>
+        Don't have an account? <a href="{% url 'account:seller' %}">Sign up as a Seller</a> or <a href="{% url 'account:client_signup' %}">Sign up as a Client</a>.
+    </p>
+    <p>
+        Already have an account? <a href="{% url 'account:client_login' %}">Login as Client</a>.
+    </p>
+</body>
+</html>

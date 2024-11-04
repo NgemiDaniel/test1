@@ -1,0 +1,22 @@
+
+
+
+    <h1>Product List</h1>
+
+    <div class="product-list" style="display: flex; flex-wrap: wrap; justify-content: center;">
+        {% for product in products %}
+            <div class="product-item" style="margin: 20px; border: 1px solid #ddd; border-radius: 5px; padding: 10px; width: 200px; text-align: center;">
+                {% if product.image %}
+                    <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 100%; height: auto; border-radius: 5px;">
+                {% endif %}
+                <h2>{{ product.name }}</h2>
+                <p>Price: ${{ product.price }}</p>
+                <a href="{% url 'product:product-detail' product.id %}" class="btn" style="text-decoration: none; background-color: #007BFF; color: white; padding: 10px 15px; border-radius: 5px;">View Details</a>
+            </div>
+        {% endfor %}
+    </div>
+
+    {% if not products %}
+        <p>No products available.</p>
+    {% endif %}
+

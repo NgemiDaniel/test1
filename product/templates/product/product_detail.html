@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ product.name }}</title>
+</head>
+<body>
+
+    <h1>{{ product.name }}</h1>
+    <p>Price: ${{ product.price }}</p>
+    <p>Description: {{ product.description }}</p>
+
+    <!-- Display product image if available -->
+    {% if product.image %}
+        <img src="{{ product.image.url }}" alt="{{ product.name }}" style="width: 300px; height: auto;">
+    {% endif %}
+
+    <!-- Display variants if any -->
+    <h2>Variants</h2>
+    {% if variants %}
+        <ul>
+            {% for variant in variants %}
+                <li>{{ variant.name }} - ${{ variant.price }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No variants available.</p>
+    {% endif %}
+
+    <!-- Display reviews if any -->
+    <h2>Reviews</h2>
+    {% if reviews %}
+        <ul>
+            {% for review in reviews %}
+                <li>
+                    <strong>{{ review.user.username }}:</strong> {{ review.content }}<br>
+                    <small>Rating: {{ review.rating }}/5</small>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No reviews available.</p>
+    {% endif %}
+
+    <!-- Display analytics if available -->
+    {% if analytics %}
+        <h2>Product Analytics</h2>
+        <p>Views: {{ analytics.views }}</p>
+        <p>Purchases: {{ analytics.purchases }}</p>
+    {% endif %}
+{% if product.seller == request.user %}
+    <a href="{% url 'product:product-edit' product.id %}">Edit</a>
+    <a href="{% url 'product:product-delete' product.id %}">Delete</a>
+{% endif %}
+
+</body>
+</html>

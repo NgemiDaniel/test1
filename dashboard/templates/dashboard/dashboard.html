@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<ul>
+        <li><a href="{% url 'product:category-list' %}">View Categories</a></li>
+        <li><a href="{% url 'product:category-add' %}">Add Category</a></li>
+
+        <!-- Assuming you have a context variable `categories` that lists all categories -->
+        {% for category in categories %}
+            <li>
+                <a href="{% url 'product:category-detail' pk=category.pk %}">{{ category.name }}</a>
+                <ul>
+                    <li><a href="{% url 'product:category-edit' pk=category.pk %}">Edit</a></li>
+                    <li><a href="{% url 'product:category-delete' pk=category.pk %}">Delete</a></li>
+                </ul>
+            </li>
+        {% endfor %}
+
+</body>
+</html>

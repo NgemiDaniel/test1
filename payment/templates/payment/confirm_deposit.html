@@ -1,0 +1,20 @@
+<!-- payment/templates/payment/confirm_payment.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Confirm Payment</title>
+</head>
+<body>
+    <h1>Confirm Payment</h1>
+    <p>User: {{ payment.user.username }}</p>
+    <p>Amount: ${{ payment.amount }}</p>
+    <p>Transaction ID: {{ payment.transaction_id }}</p>
+    <form method="POST">
+        {% csrf_token %}
+        <button type="submit">Confirm Payment</button>
+    </form>
+    <a href="{% url 'payment:verify_payments' %}">Back to Pending Payments</a>
+</body>
+</html>
